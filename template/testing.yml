@@ -23,7 +23,7 @@ jobs:
       scalar:  ${{ parameters.scalar  }}
       number:  ${{ parameters.number  }}
       boolean: ${{ parameters.boolean }}
-#      object:  ${{ parameters.object  }}
+      object:  ${{ convertToJson(parameters.object)  }}
     steps:
       - task: Bash@3
         displayName: Display env
@@ -38,16 +38,17 @@ jobs:
         inputs:
           targetType: inline
           script: |
-            echo "scalar  == ${{ variables.scalar }}"
-            echo "number  == ${{ variables.number }}"
+            echo "scalar  == ${{ variables.scalar  }}"
+            echo "number  == ${{ variables.number  }}"
             echo "boolean == ${{ variables.boolean }}"
+            echo "object  == ${{ variables.object  }}"
       - task: Bash@3
         displayName: Display params
         condition: always()
         inputs:
           targetType: inline
           script: |
-            echo "scalar  == ${{ parameters.scalar }}"
-            echo "number  == ${{ parameters.number }}"
-            echo "boolean == ${{ parameters.boolean }}"
+            echo "scalar  == ${{ parameters.scalar                }}"
+            echo "number  == ${{ parameters.number                }}"
+            echo "boolean == ${{ parameters.boolean               }}"
             echo "object  == ${{ convertToJson(parameters.object) }}"
