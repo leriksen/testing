@@ -50,3 +50,4 @@ jobs:
             echo "scalar  == ${{ parameters.scalar }}"
             echo "number  == ${{ parameters.number }}"
             echo "boolean == ${{ parameters.boolean }}"
+            echo "object  == ${{ convertToJson(parameters.object) }}"
