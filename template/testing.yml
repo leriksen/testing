@@ -19,13 +19,26 @@ jobs:
     displayName: Testing
     workspace:
       clean: all
+    variables:
+      scalar:  ${{ parameters.scalar  }}
+      number:  ${{ parameters.number  }}
+      boolean: ${{ parameters.boolean }}
+#      object:  ${{ parameters.object  }}
     steps:
       - task: Bash@3
-        # cannot call a script as no git checkout has happened yet, and workspace is clean
-        displayName: Display parameters
+        displayName: Display env
         condition: always()
         inputs:
           targetType: inline
           script: |
             env
-
+      - task: Bash@3
+        displayName: Display vars
+        condition: always()
+        inputs:
+          targetType: inline
+          script: |
+            echo "scalar  == ${{ variables.scalar }}"
+            echo "number  == ${{ variables.number }}"
+            echo "boolean == ${{ variables.boolean }}"
+#            echo "object  == ${{ variables.object }}"
