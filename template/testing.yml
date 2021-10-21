@@ -1,0 +1,31 @@
+parameters:
+  - name: scalar
+    type: string
+    default: defaultscalarvalue
+  - name: number
+    type: number
+    default: 0
+  - name: boolean
+    type: boolean
+    default: true
+  - name: object
+    type: object
+    default:
+      - key1: value1
+      - key2: value2
+
+jobs:
+  - job: Testing
+    displayName: Testing
+    workspace:
+      clean: all
+    steps:
+      - task: Bash@3
+        # cannot call a script as no git checkout has happened yet, and workspace is clean
+        displayName: Display parameters
+        condition: always()
+        inputs:
+          targetType: inline
+          script: |
+            env
+

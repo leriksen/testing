@@ -1,0 +1,10 @@
+name: $(BuildDefinitionName).$(Build.Reason)$(Rev:.r)
+
+trigger: none
+
+pr: none
+
+stages:
+  - stage: Test
+    jobs:
+      - template: template/testing.yml
