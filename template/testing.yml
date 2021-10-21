@@ -41,4 +41,12 @@ jobs:
             echo "scalar  == ${{ variables.scalar }}"
             echo "number  == ${{ variables.number }}"
             echo "boolean == ${{ variables.boolean }}"
-#            echo "object  == ${{ variables.object }}"
+      - task: Bash@3
+        displayName: Display params
+        condition: always()
+        inputs:
+          targetType: inline
+          script: |
+            echo "scalar  == ${{ parameters.scalar }}"
+            echo "number  == ${{ parameters.number }}"
+            echo "boolean == ${{ parameters.boolean }}"
