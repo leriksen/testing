@@ -71,5 +71,6 @@ jobs:
         inputs:
           azureSubscription: serviceconnection
           scriptType: pscore
-          script: |
+          scriptLocation: inlineScript
+          inlineScript: |
             az storage blob upload-batch --source site --destination '$web' --account-name leriksentesting --destination-path '${{ parameters.storageContainerPrefix }}'
