@@ -5,6 +5,6 @@ trigger: none
 pr: none
 
 extends:
-  - template: template/testing.yml
+  template: template/testing.yml
 #        parameters:
 #          storageContainerPrefix: here
