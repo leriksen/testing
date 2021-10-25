@@ -1,66 +1,66 @@
 parameters:
-	- name: scalar
-		type: string
-		default: defaultscalarvalue
-	- name: number
-		type: number
-		default: 0
-	- name: boolean
-		type: boolean
-		default: true
-	- name: object
-		type: object
-		default:
-			- key1: value1
-			- key2: value2
-	- name: storageContainerPrefix
-		type: string
-		default: ''
+  - name: scalar
+    type: string
+    default: defaultscalarvalue
+  - name: number
+    type: number
+    default: 0
+  - name: boolean
+    type: boolean
+    default: true
+  - name: object
+    type: object
+    default:
+      - key1: value1
+      - key2: value2
+  - name: storageContainerPrefix
+    type: string
+    default: ''
 
 jobs:
-	- job: Testing
-		displayName: Testing
-		workspace:
-			clean: all
-		variables:
-			scalar:  ${{ parameters.scalar  }}
-			number:  ${{ parameters.number  }}
-			boolean: ${{ parameters.boolean }}
-			object:  ${{ convertToJson(parameters.object)  }}
-		steps:
-			- task: Bash@3
-				displayName: Display env
-				condition: always()
-				inputs:
-					targetType: inline
-					script: |
-						env
-			- task: Bash@3
-				displayName: Display vars
-				condition: always()
-				inputs:
-					targetType: inline
-					script: |
-						echo "scalar  == ${{ variables.scalar  }}"
-						echo "number  == ${{ variables.number  }}"
-						echo "boolean == ${{ variables.boolean }}"
-						echo "object  == ${{ variables.object  }}"
-			- task: Bash@3
-				displayName: Display params
-				condition: always()
-				inputs:
-					targetType: inline
-					script: |
-						echo "scalar  == ${{ parameters.scalar                }}"
-						echo "number  == ${{ parameters.number                }}"
-						echo "boolean == ${{ parameters.boolean               }}"
-						echo "object  == ${{ convertToJson(parameters.object) }}"
+  - job: Testing
+    displayName: Testing
+    workspace:
+      clean: all
+    variables:
+      scalar:  ${{ parameters.scalar  }}
+      number:  ${{ parameters.number  }}
+      boolean: ${{ parameters.boolean }}
+      object:  ${{ convertToJson(parameters.object)  }}
+    steps:
+      - task: Bash@3
+        displayName: Display env
+        condition: always()
+        inputs:
+          targetType: inline
+          script: |
+            env
+      - task: Bash@3
+        displayName: Display vars
+        condition: always()
+        inputs:
+          targetType: inline
+          script: |
+            echo "scalar  == ${{ variables.scalar  }}"
+            echo "number  == ${{ variables.number  }}"
+            echo "boolean == ${{ variables.boolean }}"
+            echo "object  == ${{ variables.object  }}"
+      - task: Bash@3
+        displayName: Display params
+        condition: always()
+        inputs:
+          targetType: inline
+          script: |
+            echo "scalar  == ${{ parameters.scalar                }}"
+            echo "number  == ${{ parameters.number                }}"
+            echo "boolean == ${{ parameters.boolean               }}"
+            echo "object  == ${{ convertToJson(parameters.object) }}"
 
-			- task: Bash@3
-				displayName: Show files
-				inputs:
-					targetType: inline
-					script: |
-						pwd
-						ls -la
-						tree
+      - task: Bash@3
+        displayName: Show files
+        inputs:
+          targetType: inline
+          script: |
+            pwd
+            ls -la
+            tree
