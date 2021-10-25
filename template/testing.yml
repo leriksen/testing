@@ -64,5 +64,4 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az --version
-            az storage blob upload-batch --source site --destination '$web' --account-name leriksentesting --account-key 'kVN5xA12KKOFmJfF/KcnBw2pISB7fiqqP/KAfKE5FNiF7fghJkP4irJOHQwgYVqKcwpEaIib8aF6NRbqxTkBtg==' --destination-path '$(storageContainerPrefix)'
+            az storage blob upload-batch --source site --destination '$web' --account-name leriksentesting --account-key 'kVN5xA12KKOFmJfF/KcnBw2pISB7fiqqP/KAfKE5FNiF7fghJkP4irJOHQwgYVqKcwpEaIib8aF6NRbqxTkBtg==' --destination-path '${{ parameters.storageContainerPrefix }}'
