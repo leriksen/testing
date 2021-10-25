@@ -70,12 +70,12 @@ stages:
   #            echo "boolean == ${{ parameters.boolean               }}"
   #            echo "object  == ${{ convertToJson(parameters.object) }}"
   #
-  #        - task: AzureCLI@2
-  #          displayName: deploy site
-  #          inputs:
-  #            azureSubscription: serviceconnection
-  #            scriptType: pscore
-  #            scriptLocation: inlineScript
-  #            inlineScript: |
-  #              echo storageContainerPrefix == $(storageContainerPrefix)
-  #              az storage blob upload-batch --source site --destination '$web' --account-name leriksentesting --account-key 'kVN5xA12KKOFmJfF/KcnBw2pISB7fiqqP/KAfKE5FNiF7fghJkP4irJOHQwgYVqKcwpEaIib8aF6NRbqxTkBtg==' --destination-path '$(storageContainerPrefix)'
+          - task: AzureCLI@2
+            displayName: deploy site
+            inputs:
+              azureSubscription: serviceconnection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                echo storageContainerPrefix == $(storageContainerPrefix)
+                az storage blob upload-batch --source site --destination '$web' --account-name leriksentesting --account-key 'kVN5xA12KKOFmJfF/KcnBw2pISB7fiqqP/KAfKE5FNiF7fghJkP4irJOHQwgYVqKcwpEaIib8aF6NRbqxTkBtg==' --destination-path '$(storageContainerPrefix)'
