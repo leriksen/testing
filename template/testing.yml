@@ -28,6 +28,7 @@ jobs:
       boolean: ${{ parameters.boolean }}
       object:  ${{ convertToJson(parameters.object)  }}
     steps:
+      - checkout
       - task: Bash@3
         displayName: Display env
         condition: always()
