@@ -31,7 +31,7 @@ variables:
       value: ''
   - ${{ if ne(length(parameters.storageContainerPrefix), 0) }}:
     - name: storageContainerPrefix
-      value: --deploy-path ${{ parameters.storageContainerPrefix }}
+      value: --destination-path ${{ parameters.storageContainerPrefix }}
 
 stages:
   - stage: Test
