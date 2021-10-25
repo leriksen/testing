@@ -17,63 +17,65 @@ parameters:
     type: string
     default: ''
 
-jobs:
-  - job: Testing
-    displayName: Testing
-    workspace:
-      clean: all
-    variables:
-      - name: scalar
-        value: ${{ parameters.scalar  }}
-      - name: number
-        value: ${{ parameters.number  }}
-      - name: boolean
-        value: ${{ parameters.boolean }}
-      - name: object
-        value: ${{ convertToJson(parameters.object)  }}
-      - ${{ if eq(length(parameters.storageContainerPrefix), 0) }}
-        - name: storageContainerPrefix
-          value: ''
-      - ${{ if ne(length(parameters.storageContainerPrefix), 0) }}
-        - name: storageContainerPrefix
-          value: ${{ parameters.storageContainerPrefix }}
+variables:
+  - name: scalar
+    value: ${{ parameters.scalar  }}
+  - name: number
+    value: ${{ parameters.number  }}
+  - name: boolean
+    value: ${{ parameters.boolean }}
+  - name: object
+    value: ${{ convertToJson(parameters.object)  }}
+  - ${{ if eq(length(parameters.storageContainerPrefix), 0) }}:
+    - name: storageContainerPrefix
+      value: ''
+  - ${{ if ne(length(parameters.storageContainerPrefix), 0) }}:
+    - name: storageContainerPrefix
+            value: ${{ parameters.storageContainerPrefix }}
 
-    steps:
-      - checkout: self
-      - task: Bash@3
-        displayName: Display env
-        condition: always()
-        inputs:
-          targetType: inline
-          script: |
-            env
-#      - task: Bash@3
-#        displayName: Display vars
-#        condition: always()
-#        inputs:
-#          targetType: inline
-#          script: |
-#            echo "scalar  == ${{ variables.scalar  }}"
-#            echo "number  == ${{ variables.number  }}"
-#            echo "boolean == ${{ variables.boolean }}"
-#            echo "object  == ${{ variables.object  }}"
-#      - task: Bash@3
-#        displayName: Display params
-#        condition: always()
-#        inputs:
-#          targetType: inline
-#          script: |
-#            echo "scalar  == ${{ parameters.scalar                }}"
-#            echo "number  == ${{ parameters.number                }}"
-#            echo "boolean == ${{ parameters.boolean               }}"
-#            echo "object  == ${{ convertToJson(parameters.object) }}"
-
-      - task: AzureCLI@2
-        displayName: deploy site
-        inputs:
-          azureSubscription: serviceconnection
-          scriptType: pscore
-          scriptLocation: inlineScript
-          inlineScript: |
-            echo storageContainerPrefix == $(storageContainerPrefix)
-            az storage blob upload-batch --source site --destination '$web' --account-name leriksentesting --account-key 'kVN5xA12KKOFmJfF/KcnBw2pISB7fiqqP/KAfKE5FNiF7fghJkP4irJOHQwgYVqKcwpEaIib8aF6NRbqxTkBtg==' --destination-path '$(storageContainerPrefix)'
+stages:
+  - stage: Test
+    jobs:
+    - job: Testing
+      displayName: Testing
+      workspace:
+        clean: all
+      steps:
+        - checkout: self
+        - task: Bash@3
+          displayName: Display env
+          condition: always()
+          inputs:
+            targetType: inline
+            script: |
+              env
+  #      - task: Bash@3
+  #        displayName: Display vars
+  #        condition: always()
+  #        inputs:
+  #          targetType: inline
+  #          script: |
+  #            echo "scalar  == ${{ variables.scalar  }}"
+  #            echo "number  == ${{ variables.number  }}"
+  #            echo "boolean == ${{ variables.boolean }}"
+  #            echo "object  == ${{ variables.object  }}"
+  #      - task: Bash@3
+  #        displayName: Display params
+  #        condition: always()
+  #        inputs:
+  #          targetType: inline
+  #          script: |
+  #            echo "scalar  == ${{ parameters.scalar                }}"
+  #            echo "number  == ${{ parameters.number                }}"
+  #            echo "boolean == ${{ parameters.boolean               }}"
+  #            echo "object  == ${{ convertToJson(parameters.object) }}"
+  #
+  #        - task: AzureCLI@2
+  #          displayName: deploy site
+  #          inputs:
+  #            azureSubscription: serviceconnection
+  #            scriptType: pscore
+  #            scriptLocation: inlineScript
+  #            inlineScript: |
+  #              echo storageContainerPrefix == $(storageContainerPrefix)
+  #              az storage blob upload-batch --source site --destination '$web' --account-name leriksentesting --account-key 'kVN5xA12KKOFmJfF/KcnBw2pISB7fiqqP/KAfKE5FNiF7fghJkP4irJOHQwgYVqKcwpEaIib8aF6NRbqxTkBtg==' --destination-path '$(storageContainerPrefix)'

@@ -4,9 +4,7 @@ trigger: none
 
 pr: none
 
-stages:
-  - stage: Test
-    jobs:
-      - template: template/testing.yml
+extends:
+  - template: template/testing.yml
 #        parameters:
 #          storageContainerPrefix: here
