@@ -57,11 +57,13 @@ jobs:
             echo "object  == ${{ convertToJson(parameters.object) }}"
       - task: Bash@3
          displayName: Show files
-         targetType: inline
-         script: |
-           pwd
-           ls -la
-           tree
+         inputs:
+           targetType: inline
+           script: |
+             pwd
+             ls -la
+             tree
+
 #      - task: AzureCLI@2
 #        displayName: Upload Files
 #        inputs:
