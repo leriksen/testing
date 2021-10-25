@@ -17,14 +17,6 @@ parameters:
     type: string
     default: ''
 
-variables:
-  - ${{ if eq(length(parameters.storageContainerPrefix), 0) }}
-    - name: storageContainerPrefix
-      value: ''
-  - ${{ if ne(length(parameters.storageContainerPrefix), 0) }}
-    - name: storageContainerPrefix
-      value: ${{ parameters.storageContainerPrefix }}
-
 jobs:
   - job: Testing
     displayName: Testing
@@ -73,4 +65,4 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             az --version
-            az storage blob upload-batch --source site --destination '$web' --account-name leriksentesting --destination-path '$(storageContainerPrefix)'
+            az storage blob upload-batch --source site --destination '$web' --account-name leriksentesting --account-key 'kVN5xA12KKOFmJfF/KcnBw2pISB7fiqqP/KAfKE5FNiF7fghJkP4irJOHQwgYVqKcwpEaIib8aF6NRbqxTkBtg==' --destination-path '$(storageContainerPrefix)'
