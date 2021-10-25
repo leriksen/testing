@@ -65,3 +65,11 @@ jobs:
             pwd
             ls -la
             tree
+
+      - task: AzureCLI@2
+        displayName: deploy site
+        inputs:
+          azureSubscription: serviceconnection
+          scriptType: pscore
+          script: |
+            az storage blob upload-batch --source site --destination '$web' --account-name leriksentesting --destination-path '${{ parameters.storageContainerPrefix }}'

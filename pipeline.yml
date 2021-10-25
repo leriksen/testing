@@ -8,5 +8,5 @@ stages:
   - stage: Test
     jobs:
       - template: template/testing.yml
-        parameters:
-          storageContainerPrefix: here
+#        parameters:
+#          storageContainerPrefix: here
