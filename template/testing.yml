@@ -23,10 +23,14 @@ jobs:
     workspace:
       clean: all
     variables:
-      scalar:  ${{ parameters.scalar  }}
-      number:  ${{ parameters.number  }}
-      boolean: ${{ parameters.boolean }}
-      object:  ${{ convertToJson(parameters.object)  }}
+      - name: scalar
+        value: ${{ parameters.scalar  }}
+      - name: number
+        value: ${{ parameters.number  }}
+      - name: boolean
+        value: ${{ parameters.boolean }}
+      - name: object
+        value: ${{ convertToJson(parameters.object)  }}
       - ${{ if eq(length(parameters.storageContainerPrefix), 0) }}
         - name: storageContainerPrefix
           value: ''
