@@ -42,7 +42,7 @@ stages:
         clean: all
       steps:
         - ${{ each parameter in parameters }}:
-          - script: echo "${{ parameter.key }} == |${{ parameter.value }}|"
+          - script: echo "${{ parameter.key }} == |${{ convertToJson(parameter.value) }}|"
         - checkout: self
         - task: Bash@3
           displayName: Display env
