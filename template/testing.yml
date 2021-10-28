@@ -41,6 +41,8 @@ stages:
       workspace:
         clean: all
       steps:
+        - ${{ each parameter in parameters }}:
+          - script: echo "${{ parameter.key }} == |${{ parameter.value }}|"
         - checkout: self
         - task: Bash@3
           displayName: Display env
