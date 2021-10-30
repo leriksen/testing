@@ -43,14 +43,13 @@ stages:
       steps:
         - ${{ each parameter in parameters }}:
           - script: echo "${{ parameter.key }} == |${{ convertToJson(parameter.value) }}|"
-        - checkout: self
         - task: Bash@3
-          displayName: Display env
+          displayName: show fs
           condition: always()
           inputs:
             targetType: inline
             script: |
-              env
+              pwd && ls -al
   #      - task: Bash@3
   #        displayName: Display vars
   #        condition: always()

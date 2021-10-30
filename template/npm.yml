@@ -1,0 +1,8 @@
+parameters:
+  - name: basePath
+    type: string
+  - name: version
+    type: string
+
+steps:
+  - script: (cd "${{ parameters.basePath }}; npm version "${{ parameters.version }} --no-git-tag-version")

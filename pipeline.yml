@@ -4,7 +4,14 @@ trigger: none
 
 pr: none
 
-extends:
-  template: template/testing.yml
-  parameters:
-    storageContainerPrefix: here
+steps:
+  - script: pwd && ls -al
+#  - template: template/npm.yml
+#    parameters:
+#      - basePath: '.'
+#      - version: '1.1.1'
+
+#extends:
+#  template: template/testing.yml
+#  parameters:
+#    storageContainerPrefix: here
