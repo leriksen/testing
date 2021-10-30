@@ -11,33 +11,33 @@ variables:
     value: 'testing/npm'
 
 jobs:
-  - job: show-config
+  - job: show_config
     steps:
       - script: pwd && ls -al
-  - job: npm-version-default-basepath
+  - job: npm_version_default_basepath
     steps:
       - template: template/npm.yml
         parameters:
           version: '1.1.1'
-  - job: npm-version-empty-basepath
+  - job: npm_version_empty_basepath
     steps:
       - template: template/npm.yml
         parameters:
           version: '2.2.2'
           basePath: ''
-  - job: npm-version-provided-basepath
+  - job: npm_version_provided_basepath
     steps:
       - template: template/npm.yml
         parameters:
           version: '3.3.3'
           basePath: 'testing/npm'
-  - job: npm-version-unset-variable-basepath
+  - job: npm_version_unset_variable_basepath
     steps:
       - template: template/npm.yml
         parameters:
           version: '4.4.4'
           basePath: ${{ variables.basePathEmpty }}
-  - job: npm-version-set-variable-basepath
+  - job: npm_version_set_variable_basepath
     steps:
       - template: template/npm.yml
         parameters:
