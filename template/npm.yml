@@ -1,8 +1,12 @@
 parameters:
   - name: basePath
     type: string
+    default: ''
   - name: version
     type: string
 
 steps:
-  - script: (cd "${{ parameters.basePath }}; npm version "${{ parameters.version }} --no-git-tag-version")
+  - ${{ if eq(length(parameters.basePath), 0) }}:
+    - script:  npm version "${{ parameters.version }}" --no-git-tag-version)
+  - ${{ if ne(length(parameters.basePath), 0) }}:
+    - script: (cd "${{ parameters.basePath }}"; npm version "${{ parameters.version }}" --no-git-tag-version)
