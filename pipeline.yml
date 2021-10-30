@@ -10,6 +10,9 @@ variables:
   - name: basePathSet
     value: 'testing/npm'
 
+pool:
+  vmImage: ubuntu-latest
+
 jobs:
   - job: show_config
     steps:
