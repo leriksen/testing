@@ -18,29 +18,31 @@ jobs:
     steps:
       - template: template/npm.yml
         parameters:
-          - version: '1.1.1'
+          version: '1.1.1'
   - job: npm-version-empty-basepath
     steps:
       - template: template/npm.yml
         parameters:
-          - version: '2.2.2'
-          - basePath: ''
+          version: '2.2.2'
+          basePath: ''
   - job: npm-version-provided-basepath
     steps:
       - template: template/npm.yml
         parameters:
-          - version: '3.3.3'
-          - basePath: 'testing/npm'
+          version: '3.3.3'
+          basePath: 'testing/npm'
   - job: npm-version-unset-variable-basepath
     steps:
       - template: template/npm.yml
         parameters:
-          - version: '4.4.4'
+          version: '4.4.4'
+          basePath: ${{ variables.basePathEmpty }}
   - job: npm-version-set-variable-basepath
     steps:
       - template: template/npm.yml
         parameters:
-          - version: '5.5.5'
+          version: '5.5.5'
+          basePath: ${{ variables.basePathSet }}
 
 #extends:
 #  template: template/testing.yml
