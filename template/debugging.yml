@@ -45,8 +45,8 @@ stages:
             targetType: filePath
             filePath: scripts/show_parameters.sh
           env:
-            parameter_show: this_one
-            no_parameter_show: not_this_one
+            - ${{ each parameter in parameters}}:
+              parameter_${{ parameter.key }}: "|${{ convertToJson(parameter.value) }}|"
     - job: Testing
       displayName: Testing
       workspace:
