@@ -43,7 +43,7 @@ stages:
           displayName: Show parameters
           inputs:
             targetType: filePath
-            filePath: ../scripts/show_parameters.sh
+            filePath: scripts/show_parameters.sh
     - job: Testing
       displayName: Testing
       workspace:
