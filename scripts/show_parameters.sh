@@ -2,12 +2,12 @@
 
 set euo -pipefail
 
-echo "logic goes here"
-
 prefix="parameter_"
 
+# look for all the environment variables with the prefix in front
 for var in "${!parameter_@}"; do
-    printf '%s=%s\n' ${var#"$prefix"} "${!var}"
+  # display the envvar, after stripping the prefix off the front
+  printf '%s=%s\n' ${var#"$prefix"} "${!var}"
 done
 
 exit 0
