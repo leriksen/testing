@@ -1,0 +1,13 @@
+name: $(BuildDefinitionName).$(Build.Reason)$(Rev:.r)
+
+trigger: none
+
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+extends:
+  template: template/testing.yml
+  parameters:
+    storageContainerPrefix: here
