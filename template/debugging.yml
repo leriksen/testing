@@ -47,6 +47,14 @@ stages:
           env:
             ${{ each parameter in parameters }}:
               parameter_${{ parameter.key }}: "|${{ convertToJson(parameter.value) }}|"
+        - task: Bash@3
+          displayName: Show variables
+          inputs:
+            targetType: filePath
+            filePath: scripts/show_variables.sh
+          env:
+            ${{ each variable in variables }}:
+              variable_${{ variable.key }}: "|${{ convertToJson(variable.value) }}|"
     - job: Testing
       displayName: Testing
       workspace:
