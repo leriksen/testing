@@ -8,6 +8,6 @@ pool:
   vmImage: ubuntu-latest
 
 extends:
-  template: template/testing.yml
+  template: template/debugging.yml
   parameters:
     storageContainerPrefix: here

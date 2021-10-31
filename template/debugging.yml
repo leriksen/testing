@@ -36,13 +36,21 @@ variables:
 stages:
   - stage: Test
     jobs:
+    - job: Introspection
+      displayName: Display parameters and variables
+      steps:
+        - task: Bash@3
+          displayName: Show parameters
+          inputs:
+            targetType: filePath
+            filePath: ../scripts/show_parameters.sh
     - job: Testing
       displayName: Testing
       workspace:
         clean: all
       steps:
-        - ${{ each parameter in parameters }}:
-          - script: echo "${{ parameter.key }} == |${{ convertToJson(parameter.value) }}|"
+#        - ${{ each parameter in parameters }}:
+#          - script: echo "${{ parameter.key }} == |${{ convertToJson(parameter.value) }}|"
         - task: Bash@3
           displayName: show fs
           condition: always()
@@ -50,27 +58,6 @@ stages:
             targetType: inline
             script: |
               pwd && ls -al
-  #      - task: Bash@3
-  #        displayName: Display vars
-  #        condition: always()
-  #        inputs:
-  #          targetType: inline
-  #          script: |
-  #            echo "scalar  == ${{ variables.scalar  }}"
-  #            echo "number  == ${{ variables.number  }}"
-  #            echo "boolean == ${{ variables.boolean }}"
-  #            echo "object  == ${{ variables.object  }}"
-  #      - task: Bash@3
-  #        displayName: Display params
-  #        condition: always()
-  #        inputs:
-  #          targetType: inline
-  #          script: |
-  #            echo "scalar  == ${{ parameters.scalar                }}"
-  #            echo "number  == ${{ parameters.number                }}"
-  #            echo "boolean == ${{ parameters.boolean               }}"
-  #            echo "object  == ${{ convertToJson(parameters.object) }}"
-  #
         - task: AzureCLI@2
           displayName: deploy site
           inputs:
